@@ -31,7 +31,11 @@
 #include "qelapsedtimer.h"
 #include "qmutex.h"
 #include "urlhandlerhttp.h"
+#ifdef CAQTDM_UNITTEST_INCLUDE
 class HttpPerformanceData
+#else
+class Q_DECL_EXPORT HttpPerformanceData
+#endif
 {
 public:
     HttpPerformanceData();

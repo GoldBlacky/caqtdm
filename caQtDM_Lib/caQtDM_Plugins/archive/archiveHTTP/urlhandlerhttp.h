@@ -29,8 +29,11 @@
 #include "qdatetime.h"
 #include "qurl.h"
 #include <QObject>
-
+#ifdef CAQTDM_UNITTEST_INCLUDE
+class UrlHandlerHttp : public QObject
+#else
 class Q_DECL_EXPORT UrlHandlerHttp : public QObject
+#endif
 {
     Q_OBJECT
 public:
@@ -51,6 +54,8 @@ public:
     /*
      * Sets the url by parsing & saving all known parameters it can find, including https, domain name, path and GET parameters.
      * The input can be anything from just the domain name up to a previously fully assembled url.
+     * Watch out as this overwrites the path to raw if a path is given but no binCount parameter, if a path is given and binCount exists, the path to binned is overwritten.
+     * If no path is given, but there are parameters, then the path to raw is reset to "".
      * */
     void setUrl(const QUrl &newUrl);
 
@@ -97,11 +102,11 @@ public:
     void setBackend(const QString &newBackend);
 
     /*
-     * Returns the channel name without the suffix (.X/.Y/.minX/.minY).
+     * Returns the channel name without the suffix (.X/.Y/.minY/.minY).
      * */
     QString channelName() const;
     /*
-     * Sets the channel name with the given name but removes the suffix first (.X/.Y/.minX/.minY)-
+     * Sets the channel name with the given name but removes the suffix first (.X/.Y/.minY/.minY)-
      * */
     void setChannelName(const QString &newChannelName);
 
