@@ -23,6 +23,9 @@
  *    erik.schwarz@psi.ch
  */
 
+/// This is a simple example how a Widget can be tested. This will usually be quite difficult, as it would require a lot of mocking.
+/// However, it is possible and by reusing this code example together with the corresponding CMakeList it should be reproducible for other widgets.
+
 #include "gtest/gtest.h"
 
 #include <caStripPlot>
